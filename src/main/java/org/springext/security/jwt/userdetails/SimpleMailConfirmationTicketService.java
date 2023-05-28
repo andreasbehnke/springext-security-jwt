@@ -6,9 +6,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import java.util.UUID;
-
-//@ConditionalOnBean(name = "mailSender")
+@ConditionalOnBean(name = "mailSender")
 @Service
 public class SimpleMailConfirmationTicketService implements ConfirmationTicketService {
 

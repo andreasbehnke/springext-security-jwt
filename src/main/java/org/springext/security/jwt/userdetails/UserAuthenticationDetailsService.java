@@ -19,7 +19,6 @@ public interface UserAuthenticationDetailsService<U extends UserAuthenticationDe
 
     U loadUserByKey(String userKey) throws UsernameNotFoundException;
 
-    @SuppressWarnings("unchecked")
     default U getAuthorizedUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || authentication.getPrincipal() == null || !(authentication.getPrincipal() instanceof UserAuthenticationDetails)) {

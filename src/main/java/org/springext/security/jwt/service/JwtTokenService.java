@@ -1,6 +1,9 @@
 package org.springext.security.jwt.service;
 
 import io.jsonwebtoken.*;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -8,9 +11,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -35,7 +35,7 @@ public class JwtTokenService {
 
     JwtDetails getTokenDetails(String token) {
         try {
-            Claims claims = Jwts.parser().setSigningKey(jwtConfigurationProperties.getSigningKey())
+            Claims claims = Jwts.parserBuilder().setSigningKey(jwtConfigurationProperties.getSigningKey()).build()
                     .parseClaimsJws(token).getBody();
             return new JwtDetails(claims.getSubject());
         } catch (SignatureException ex) {
